@@ -54,10 +54,13 @@ console.log(listaBombe);
 
 while ( listaScelte.length < livello ){     //chiedere fino a quando la lista dell'utente arriva al numero richiesto 
     let numeroUtente = parseInt (prompt("inserisci un numero")); //chiedo ll'utente di inserire un numero
-    if ( numeroUtente < 1 || numeroUtente > numeroRandomicoMassimo || isNaN(numeroUtente) || (listaScelte.includes(numeroUtente) == true) ){ //fino a quando non è un numero ( isNan) richiedere un numero e se è già presente il numero (istruzuone scritta sotto)
-       numeroUtente = prompt("Hai inserito un numero non valido, inserisci un numero")
-    }
-
+    while ( numeroUtente < 1 || numeroUtente > numeroRandomicoMassimo || isNaN(numeroUtente) || (listaScelte.includes(numeroUtente) == true) ){ //fino a quando non è un numero ( isNan) richiedere un numero e se è già presente il numero (istruzuone scritta sotto)
+        if ( (listaScelte.includes(numeroUtente) == true) ){
+            numeroUtente = parseInt(prompt("hai inserito un numero già inserito, inseriscine uno diverso"));
+        } else {
+            numeroUtente = parseInt(prompt("Hai inserito un numero non valido, inserisci un numero") )
+        }
+    } 
     //questo if serve per controllare che i numeri scelti dall'utente non siano uguali ai numeri presenti in listabombe
     if ( listaBombe.includes(numeroUtente) ){ //questo vuol dire (se l'utente ha scelto un numero presente in lista bombe)
         alert("Hai perso, il tuo punteggio è: " + listaScelte.length);
