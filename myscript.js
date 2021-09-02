@@ -31,25 +31,36 @@
 
 
 
-    // #PREPARATION
-    // 1
+    
+let listaBombe = []; //questo è l'array in cui verrano inseriti tot. numeri random associati ai numeri bomba
+let numeroDiBombe = 2; //ho messo let e non const perchè in base alla difficolta varia il numero di bombe
+const numeroRadomicoMassimo = 10; //indica i numeri massimi da randomizzare
 
-    let listaBombe = []; //questo è l'array in cui verrano inseriti tot. numeri random associati ai numeri bomba
-    let numeroDiBombe = 10; //ho messo let e non const perchè in base alla difficolta varia il numero di bombe
-    const numeroRadomicoMassimo = 100; //indica i numeri massimi da randomizzare
 
-    while ( listaBombe.length < numeroDiBombe){
-        
-        let numeroRandomico = getRandomNumber(1, numeroRadomicoMassimo); //genera randomicamente i numeri nell'array listabombe
-        if (listaBombe.includes(numeroRandomico) == false);{ //questo per non far ripetere gli stessi numeri
-            listaBombe.push(numeroRandomico); //aggiungi  un numero randomico nell'array listabombe
-        }
+const livello = numeroRadomicoMassimo - numeroDiBombe //numeri di tentativi che vengono lasciati all'utente
+
+let listaScelte = [];  //array dove si inseriscono i numeri scelti dall'utente
+
+
+while ( listaBombe.length < numeroDiBombe){
+    
+    let numeroRandomico = getRandomNumber(1, numeroRadomicoMassimo); //genera randomicamente i numeri nell'array listabombe
+    if (listaBombe.includes(numeroRandomico) == false);{ //questo per non far ripetere gli stessi numeri
+        listaBombe.push(numeroRandomico); //aggiungi  un numero randomico nell'array listabombe
     }
+}
 
-    console.log(listaBombe);
+console.log(listaBombe);
 
-    //FUNZIONI
-
-    function getRandomNumber(min, max){
-        return Math.floor(Math.random() * (max - min + 1)) + min;
+while ( listaScelte.length < livello ){     //chiedere fino a quando la lista dell'utente arriva al numero richiesto 
+    const numeroUtente = prompt("inserisci un numero"); //chiedo ll'utente di inserire un numero
+    while ( IsNaN (numeroUtente) ){
+        numeroUtente = prompt("inserisci un numero");
     }
+}
+
+//FUNZIONI
+
+function getRandomNumber(min, max){
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
