@@ -31,21 +31,21 @@
 
 
 
-    
+
 let listaBombe = []; //questo è l'array in cui verrano inseriti tot. numeri random associati ai numeri bomba
 let numeroDiBombe = 2; //ho messo let e non const perchè in base alla difficolta varia il numero di bombe
-const numeroRadomicoMassimo = 10; //indica i numeri massimi da randomizzare
+const numeroRandomicoMassimo = 10; //indica i numeri massimi da randomizzare
 
 
-const livello = numeroRadomicoMassimo - numeroDiBombe //numeri di tentativi che vengono lasciati all'utente
+const livello = numeroRandomicoMassimo - numeroDiBombe //numeri di tentativi che vengono lasciati all'utente
 
 let listaScelte = [];  //array dove si inseriscono i numeri scelti dall'utente
 
 
 while ( listaBombe.length < numeroDiBombe){
     
-    let numeroRandomico = getRandomNumber(1, numeroRadomicoMassimo); //genera randomicamente i numeri nell'array listabombe
-    if (listaBombe.includes(numeroRandomico) == false);{ //questo per non far ripetere gli stessi numeri
+    let numeroRandomico = getRandomNumber(1, numeroRandomicoMassimo); //genera randomicamente i numeri nell'array listabombe
+    if (listaBombe.includes(numeroRandomico) == false){ //questo per non far ripetere gli stessi numeri
         listaBombe.push(numeroRandomico); //aggiungi  un numero randomico nell'array listabombe
     }
 }
@@ -53,11 +53,25 @@ while ( listaBombe.length < numeroDiBombe){
 console.log(listaBombe);
 
 while ( listaScelte.length < livello ){     //chiedere fino a quando la lista dell'utente arriva al numero richiesto 
-    const numeroUtente = prompt("inserisci un numero"); //chiedo ll'utente di inserire un numero
-    while ( IsNaN (numeroUtente) ){
-        numeroUtente = prompt("inserisci un numero");
+    let numeroUtente = parseInt (prompt("inserisci un numero")); //chiedo ll'utente di inserire un numero
+    if ( numeroUtente < 1 || numeroUtente > numeroRandomicoMassimo || isNaN(numeroUtente) || (listaScelte.includes(numeroUtente) == true) ){ //fino a quando non è un numero ( isNan) richiedere un numero e se è già presente il numero (istruzuone scritta sotto)
+       numeroUtente = prompt("Hai inserito un numero non valido, inserisci un numero")
+    }
+
+    //questo if serve per controllare che i numeri scelti dall'utente non siano uguali ai numeri presenti in listabombe
+    if ( listaBombe.includes(numeroUtente) ){ //questo vuol dire (se l'utente ha scelto un numero presente in lista bombe)
+        alert("Hai perso, il tuo punteggio è: " + listaScelte.length);
+        listaScelte.length = livello;
+    } else {
+        listaScelte.push(numeroUtente);
+        if (listaScelte.length == livello)
+        alert("hai vinto, il tuo punteggio è: " + listaScelte.length);
     }
 }
+
+console.log(listaScelte);
+
+
 
 //FUNZIONI
 
